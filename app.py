@@ -128,7 +128,7 @@ st.markdown("""
 
 # Load API Keys (Set up in .env file)
 
-os.environ["GROQ_API_KEY"] = st.Secrets("GROQ_API_KEY")
+os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 # Initialize LLM
 llm = ChatGroq(model="qwen-2.5-32b")
