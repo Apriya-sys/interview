@@ -280,9 +280,9 @@ def recognize_speech_from_mic(audio_file):
 
 # Helper function to get score CSS class
 def get_score_class(score):
-    if score >= 8:
+    if score >= 4:
         return "high-score"
-    elif score >= 6:
+    elif score >= 3:
         return "medium-score"
     else:
         return "low-score"
