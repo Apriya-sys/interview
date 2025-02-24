@@ -178,7 +178,7 @@ def generate_questions(state: InterviewState):
 # Step 2: Analyze Answer
 analyze_answer_prompt = PromptTemplate(
     input_variables=["current_question", "answer"],
-    template="Evaluate this answer based on clarity, correctness, and depth.\nQuestion: {current_question}\nAnswer: {answer}\nProvide only a score not any text out of 5 "
+    template="Evaluate this answer based on clarity, correctness, and depth.\nQuestion: {current_question}\nAnswer: {answer}\nProvide only a score not text out of 5 as a single number."
 )
 analyze_answer_chain = analyze_answer_prompt | llm
 
@@ -217,7 +217,7 @@ def provide_feedback(state: InterviewState):
 
 # Modified to always go next regardless of score
 def route_after_feedback(state: InterviewState):
-    if state["current_question_index"] >= state["max_questions"] :
+    if state["current_question_index"] >= state["max_questions"] - 1:
         return "finish"
     return "next"
 
@@ -323,34 +323,6 @@ if "interview_started" not in st.session_state:
 # App Header
 st.markdown('<div class="main-header">🎙️ AI Interview Assistant</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Practice your interview skills with personalized AI feedback</div>', unsafe_allow_html=True)
-
-# Sidebar with instructions
-with st.sidebar:
-    st.markdown("### How It Works")
-    st.markdown("""
-    1. **Enter Job Description** - Paste a real job posting or describe your target role
-    2. **Start Interview** - AI will generate relevant interview questions
-    3. **Record Your Answers** - Speak your responses naturally
-    4. **Get Feedback** - Receive personalized evaluation and tips
-    5. **Review Performance** - See your overall results at the end
-    """)
-    
-    st.markdown("### Tips for Best Results")
-    st.markdown("""
-    - Use a quiet environment for better audio recognition
-    - Speak clearly and at a normal pace
-    - Structure your answers with an introduction, main points, and conclusion
-    - Use specific examples from your experience
-    """)
-    
-    st.markdown("### About")
-    st.markdown("""
-    This AI Interview Assistant uses natural language processing to evaluate your answers based on:
-    - Relevance to the question
-    - Structure and clarity
-    - Technical accuracy
-    - Depth of knowledge
-    """)
 
 # Main content area
 if not st.session_state.interview_started:
@@ -465,7 +437,7 @@ else:
             with col2:
                 button_text = "Continue to Next Question" if curr_idx < max_questions - 1 else "Complete Interview"
                 if st.button(button_text, type="primary"):
-                    if curr_idx < max_questions:
+                    if curr_idx < max_questions - 1:
                         # Use the answer_graph to properly update the state
                         with st.spinner("Preparing next question..."):
                             st.session_state.interview_state = state
