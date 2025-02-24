@@ -217,7 +217,7 @@ def provide_feedback(state: InterviewState):
 
 # Modified to always go next regardless of score
 def route_after_feedback(state: InterviewState):
-    if state["current_question_index"] >= state["max_questions"] - 1:
+    if state["current_question_index"] >= state["max_questions"] :
         return "finish"
     return "next"
 
