@@ -249,10 +249,10 @@ def generate_final_feedback(state: InterviewState):
     for i, ans in enumerate(state["previous_answers"]):
         previous_answers_text += f"Question {i+1}: {ans['question']}\n"
         previous_answers_text += f"Answer: {ans['answer']}\n"
-        previous_answers_text += f"Score: {ans['score']}/10\n\n"
+        previous_answers_text += f"Score: {ans['score']}/5\n\n"
         total_score += ans['score']
     avg_score = total_score / len(state["previous_answers"]) if state["previous_answers"] else 0
-    previous_answers_text += f"Average score: {avg_score:.1f}/10"
+    previous_answers_text += f"Average score: {avg_score:.1f}/5"
     response = final_feedback_chain.invoke({"previous_answers": previous_answers_text})
     return {
         "final_feedback": response.content,
@@ -279,9 +279,9 @@ def recognize_speech_from_mic(audio_file):
 
 # Helper function to get score CSS class
 def get_score_class(score):
-    if score >= 8:
+    if score >= 4:
         return "high-score"
-    elif score >= 6:
+    elif score >= 3:
         return "medium-score"
     else:
         return "low-score"
@@ -400,7 +400,7 @@ else:
         
         # Display average score with color coding
         score_class = get_score_class(avg_score)
-        st.markdown(f'<div class="score-display {score_class}">Overall Score: {avg_score:.1f}/10</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="score-display {score_class}">Overall Score: {avg_score:.1f}/5</div>', unsafe_allow_html=True)
         
         # Final feedback
         st.markdown("### Final Evaluation")
@@ -456,7 +456,7 @@ else:
             
             # Display score with appropriate color
             score_class = get_score_class(state["score"])
-            st.markdown(f'<div class="score-display {score_class}">Score: {state["score"]}/10</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="score-display {score_class}">Score: {state["score"]}/5</div>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
             
             # Continue button
