@@ -178,7 +178,7 @@ def generate_questions(state: InterviewState):
 # Step 2: Analyze Answer
 analyze_answer_prompt = PromptTemplate(
     input_variables=["current_question", "answer"],
-    template="Evaluate this answer based on clarity, correctness, and depth.\nQuestion: {current_question}\nAnswer: {answer}\nProvide a score out of 5 as a single number on a new line."
+    template="Evaluate this answer based on clarity, correctness, and depth.\nQuestion: {current_question}\nAnswer: {answer}\nProvide only a score not any text out of 5 "
 )
 analyze_answer_chain = analyze_answer_prompt | llm
 
