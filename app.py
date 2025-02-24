@@ -188,7 +188,7 @@ def analyze_answer(state: InterviewState):
         "answer": state["answer"]
     })
     lines = response.content.strip().split('\n')
-    score = int(lines[-1]) if lines[-1].isdigit() 
+    score = int(lines[-1]) 
     state["score"] = score
     return state
 
