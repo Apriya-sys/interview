@@ -465,7 +465,7 @@ else:
             with col2:
                 button_text = "Continue to Next Question" if curr_idx < max_questions - 1 else "Complete Interview"
                 if st.button(button_text, type="primary"):
-                    if curr_idx < max_questions - 1:
+                    if curr_idx < max_questions:
                         # Use the answer_graph to properly update the state
                         with st.spinner("Preparing next question..."):
                             st.session_state.interview_state = state
