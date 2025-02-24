@@ -1,0 +1,8 @@
+langgraph-api
+SpeechRecognition
+langchain
+langchain-groq
+langgraph
+langchain-core
+langchain-community
+
